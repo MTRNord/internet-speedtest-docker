@@ -2,6 +2,7 @@
 version: '2'
 services:
   db:
+    network_mode: bridge
     image: tutum/influxdb 
     ports:
       - "8083:8083"
@@ -9,6 +10,7 @@ services:
     env_file:
       - ./env/db.env
   web:
+    network_mode: bridge
     image: mtrnord/internet-speedtest-docker:grafana 
     ports:
       - "3000:3000"
@@ -18,6 +20,7 @@ services:
       - VIRTUAL_HOST=speedtest.projectstreet.dynu.com
       - GF_SECURITY_ADMIN_PASSWORD=1199
   testing:
+    network_mode: bridge
     image: mtrnord/internet-speedtest-docker:speedtest
     links:
       - db:db
@@ -31,11 +34,8 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
   whoami:
+    network_mode: bridge
     image: jwilder/whoami
     container_name: whoami
     environment:
       - VIRTUAL_HOST=whoami.local
-networks:
-  default:
-    external:
-      name: nginx-proxy
