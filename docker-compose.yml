@@ -15,11 +15,16 @@ services:
     links:
       - db:db
     environment:
-      - GF_SERVER_ROOT_URL=http://localhost
-      - GF_SECURITY_ADMIN_PASSWORD=teste
+      - VIRTUAL_HOST=speedtest.projectstreet.dynu.com
   testing:
     image: mtrnord/internet-speedtest-docker:speedtest
     links:
       - db:db
     env_file:
       - ./env/testing.env
+  proxy:
+    image: jwilder/nginx-proxy
+    volume:
+      - /var/run/docker.sock:/tmp/docker.sock
+    ports:
+      - "80:80"
