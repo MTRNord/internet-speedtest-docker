@@ -24,7 +24,7 @@ services:
       - ./env/testing.env
   proxy:
     image: jwilder/nginx-proxy
-    volume:
+    volumes:
       - /var/run/docker.sock:/tmp/docker.sock
     ports:
       - "80:80"
