@@ -23,6 +23,8 @@ services:
     links:
       - db:db
     environment:
+      - GF_SERVER_ROOT_URL=http://speedtest.projectstreet.dynu.com
+      - GF_SECURITY_ADMIN_PASSWORD=1199
       - VIRTUAL_HOST=speedtest.projectstreet.dynu.com
     volumes:
      - "grafana:/var/lib/grafana"
