@@ -1,5 +1,9 @@
 ---
 version: '2'
+volumes:
+  grafana:
+  influxdb:
+
 services:
   db:
     network_mode: bridge
@@ -9,6 +13,8 @@ services:
       - "8086:8086"
     env_file:
       - ./env/db.env
+    volumes:
+     - "influxdb:/data"
   web:
     network_mode: bridge
     image: mtrnord/internet-speedtest-docker:grafana 
@@ -19,6 +25,8 @@ services:
     environment:
       - VIRTUAL_HOST=speedtest.projectstreet.dynu.com
       - GF_SECURITY_ADMIN_PASSWORD=1199
+    volumes:
+     - "grafana:/var/lib/grafana"
   testing:
     network_mode: bridge
     image: mtrnord/internet-speedtest-docker:speedtest
