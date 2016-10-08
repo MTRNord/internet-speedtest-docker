@@ -43,7 +43,7 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./proxy.tmpl:/app/nginx.tmpl
+      - ./proxy.conf:/etc/nginx/proxy.conf
   whoami:
     network_mode: bridge
     image: jwilder/whoami
